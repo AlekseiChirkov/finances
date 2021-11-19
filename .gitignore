@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm
+.idea
+.idea/
+
+# Local files and project files
+src/core/settigns_local.py
