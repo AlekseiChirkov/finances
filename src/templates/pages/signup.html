@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <form action="{% url 'users:signup' %}" method="post">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+            <input type="submit" value="Signup" id="signup">
+        </form>
+    </div>
+{% endblock %}
