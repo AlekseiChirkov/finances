@@ -8,7 +8,7 @@ from apps.finances.models import (
 )
 from apps.finances.forms import (
     OperationCreationForm, OperationCategoryCreationForm,
-    AccountCreationForm, AccountCategoryCreationFrom
+    AccountCreationForm, AccountCategoryCreationForm
 )
 
 
@@ -34,7 +34,6 @@ class OperationCreationFormTests(TestCase):
         self.assertIn('description', form.fields)
         self.assertIn('category', form.fields)
         self.assertIn('amount', form.fields)
-        self.assertIn('created_at', form.fields)
 
     def test_operation_creation_form_is_invalid(self) -> None:
         """
@@ -46,7 +45,7 @@ class OperationCreationFormTests(TestCase):
             'title': 123
         })
 
-        self.assertFalse(form.is_valid)
+        self.assertFalse(form.is_valid())
 
     def test_operation_creation_form_is_valid(self) -> None:
         """
@@ -59,7 +58,7 @@ class OperationCreationFormTests(TestCase):
             {
                 'user': self.user, 'title': 'Title',
                 'description': 'description', 'category': category,
-                'amount': Decimal(100.12)
+                'amount': Decimal("100.12")
             }
         )
         form.save()
@@ -96,20 +95,18 @@ class OperationCategoryCreationFormTests(TestCase):
         :return: None
         """
 
-        form = OperationCategoryCreationForm({
-            'title': 123
-        })
+        form = OperationCategoryCreationForm()
 
-        self.assertFalse(form.is_valid)
+        self.assertFalse(form.is_valid())
 
-    def test_operation_creation_form_is_valid(self) -> None:
+    def test_operation_category_creation_form_is_valid(self) -> None:
         """
-        Test that operation creation form is valid
+        Test that operation category creation form is valid
         :return: None
         """
 
         category = OperationCategory.objects.create(title='Title')
-        form = OperationCreationForm(
+        form = OperationCategoryCreationForm(
             {
                 'title': 'Title2', 'parent': category
             }
@@ -122,3 +119,108 @@ class OperationCategoryCreationFormTests(TestCase):
         self.assertEqual(category, form.instance)
 
 
+class AccountCreationFormTests(TestCase):
+    """Class to test account form"""
+
+    def setUp(self) -> None:
+        self.factory = RequestFactory()
+        self.user = get_user_model().objects.create_user(
+            email='admin@mail.ru', username='username', password='Password123'
+        )
+
+    def test_account_creation_form_fields(self) -> None:
+        """
+        Test that account creation form fields are valid
+        :return: None
+        """
+
+        form = AccountCreationForm()
+
+        self.assertIn('user', form.fields)
+        self.assertIn('title', form.fields)
+        self.assertIn('description', form.fields)
+        self.assertIn('category', form.fields)
+        self.assertIn('amount', form.fields)
+
+    def test_account_creation_form_is_invalid(self) -> None:
+        """
+        Test that account creation form is invalid
+        :return: None
+        """
+
+        form = AccountCreationForm({
+            'title': 123
+        })
+
+        self.assertFalse(form.is_valid())
+
+    def test_account_creation_form_is_valid(self) -> None:
+        """
+        Test that account creation form is valid
+        :return: None
+        """
+
+        category = AccountCategory.objects.create(title='Title')
+        form = AccountCreationForm(
+            {
+                'user': self.user, 'title': 'Title',
+                'description': 'description', 'category': category,
+                'amount': Decimal("100.12")
+            }
+        )
+        form.save()
+
+        account = Account.objects.get(user=self.user, title='Title')
+
+        self.assertTrue(form.is_valid())
+        self.assertEqual(account, form.instance)
+
+
+class AccountCategoryCreationFormTests(TestCase):
+    """Class to test account category form"""
+
+    def setUp(self) -> None:
+        self.factory = RequestFactory()
+        self.user = get_user_model().objects.create_user(
+            email='admin@mail.ru', username='username', password='Password123'
+        )
+
+    def test_account_category_creation_form_fields(self) -> None:
+        """
+        Test that account category creation form fields are valid
+        :return: None
+        """
+
+        form = AccountCategoryCreationForm()
+
+        self.assertIn('title', form.fields)
+        self.assertIn('parent', form.fields)
+
+    def test_account_category_creation_form_is_invalid(self) -> None:
+        """
+        Test that account category creation form is invalid
+        :return: None
+        """
+
+        form = AccountCategoryCreationForm()
+
+        self.assertFalse(form.is_valid())
+
+    def test_account_category_creation_form_is_valid(self) -> None:
+        """
+        Test that account category creation form is valid
+        :return: None
+        """
+
+        category = AccountCategory.objects.create(title='Title')
+        form = AccountCategoryCreationForm(
+            {
+                'title': 'Title2', 'parent': category
+            }
+        )
+        form.save()
+
+        category = AccountCategory.objects.get(title='Title2')
+
+        self.assertTrue(form.is_valid())
+        self.assertEqual(category, form.instance)

@@ -25,18 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-
-    'apps.finances'
-=======
-    'django.contrib.sites',
 
     # apps
     'apps.users',
     'apps.finances',
 
     # libraries and frameworks
->>>>>>> e0c6bbe2becb11bfdd1ef46af7ce43aaedab6856
 ]
 
 AUTH_USER_MODEL = 'users.User'
