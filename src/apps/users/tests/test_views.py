@@ -1,8 +1,6 @@
-from django.contrib.sessions.middleware import SessionMiddleware
-from django.http import HttpResponse
 from django.urls import reverse
 from django.test import TestCase, RequestFactory
-from django.contrib.auth import get_user_model, login, authenticate
+from django.contrib.auth import get_user_model
 
 from apps.users.views import UserSignUpFormView, UserLoginFormView
 
@@ -51,9 +49,9 @@ class UserViewsTests(TestCase):
 
         self.assertEqual(res.status_code, 200)
 
-    def test_user_is_active_creation_view(self) -> None:
+    def test_user_signup_creation_status_code(self) -> None:
         """
-        Test that form view is valid
+        Test that user creates successfully and status code is 302
         :return: None
         """
 
