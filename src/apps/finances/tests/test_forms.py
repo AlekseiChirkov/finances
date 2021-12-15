@@ -56,16 +56,17 @@ class OperationCreationFormTests(TestCase):
         category = OperationCategory.objects.create(title='Title')
         form = OperationCreationForm(
             {
-                'user': self.user, 'title': 'Title',
-                'description': 'description', 'category': category,
-                'amount': Decimal("100.12")
+                'title': 'Title', 'description': 'description',
+                'category': category, 'amount': Decimal("100.12")
             }
         )
+        form.instance.user = self.user,
         form.save()
 
         operation = Operation.objects.get(user=self.user, title='Title')
 
         self.assertTrue(form.is_valid())
+        self.assertEqual(operation.user, form.instance.user)
         self.assertEqual(operation, form.instance)
 
 
@@ -163,16 +164,17 @@ class AccountCreationFormTests(TestCase):
         category = AccountCategory.objects.create(title='Title')
         form = AccountCreationForm(
             {
-                'user': self.user, 'title': 'Title',
-                'description': 'description', 'category': category,
-                'amount': Decimal("100.12")
+                'title': 'Title', 'description': 'description',
+                'category': category, 'amount': Decimal("100.12")
             }
         )
+        form.instance.user = self.user
         form.save()
 
         account = Account.objects.get(user=self.user, title='Title')
 
         self.assertTrue(form.is_valid())
+        self.assertEqual(account.user, form.instance.user)
         self.assertEqual(account, form.instance)
 
 

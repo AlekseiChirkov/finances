@@ -28,7 +28,6 @@ class UserManager(BaseUserManager):
         """
         Method to create a superuser for admin web siteTrue
         :param email: string email
-        :param username: string username
         :param password: string password
         :return: user object QuerySet
         """
@@ -44,6 +43,8 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """User model"""
+
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
     is_active = models.BooleanField(default=False)

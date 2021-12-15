@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
 from apps.finances.models import (
     Operation, OperationCategory, Account, AccountCategory
@@ -8,9 +9,15 @@ from apps.finances.models import (
 class OperationCreationForm(forms.ModelForm):
     """Form class for operation creation"""
 
+    user = forms.ModelChoiceField(
+        queryset=get_user_model().objects.all(), required=False
+    )
+
     class Meta:
         model = Operation
-        fields = "__all__"
+        fields = (
+            'title', 'description', 'category', 'amount'
+        )
 
 
 class OperationCategoryCreationForm(forms.ModelForm):
@@ -24,9 +31,13 @@ class OperationCategoryCreationForm(forms.ModelForm):
 class AccountCreationForm(forms.ModelForm):
     """Form class for account creation"""
 
+    user = forms.ModelChoiceField(
+        queryset=get_user_model().objects.all(), required=False
+    )
+
     class Meta:
         model = Account
-        fields = "__all__"
+        fields = ('title', 'description', 'category', 'amount')
 
 
 class AccountCategoryCreationForm(forms.ModelForm):
