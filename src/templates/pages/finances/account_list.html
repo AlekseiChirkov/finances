@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/finances/operations_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finances/operation_list.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,9 +17,14 @@
             <div class="operation">
                 <div class="operation-header">
                     <h2>{{ account.title }}</h2>
-                    <i class="fas fa-edit">
-                        <a href="#" class="edit-operation"></a>
-                    </i>
+                    <span>
+                        <a href="{% url 'finances:account-update' account.pk %}"
+                           class="fas fa-edit edit-operation"></a>
+                        <form action="{% url 'finances:account-delete' account.pk %}"
+                              method="post"> {% csrf_token %}
+                            <button type="submit" class="fas fa-trash"></button>
+                        </form>
+                    </span>
                 </div>
                 <h3>{{ account.category }}</h3>
                 <p>{{ account.description }}</p>

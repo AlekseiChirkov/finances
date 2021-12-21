@@ -8,8 +8,8 @@ from apps.finances.models import (
     Operation, OperationCategory, Account, AccountCategory
 )
 from apps.finances.forms import (
-    OperationCreationForm, OperationCategoryCreationForm,
-    AccountCreationForm, AccountCategoryCreationForm
+    OperationForm, OperationCategoryForm,
+    AccountForm, AccountCategoryForm
 )
 
 
@@ -21,61 +21,147 @@ class OperationListView(ListView):
     template_name = 'pages/finances/operation_list.html'
 
 
+class OperationDetailView(DetailView):
+    """View for retrieve operation detail page"""
+
+    model = Operation
+    template_name = 'pages/finances/operation_detail.html'
+
+
 class OperationCreateView(CreateView):
     """View to create operations page"""
 
     model = Operation
-    form_class = OperationCreationForm
-    success_url = reverse_lazy('operation-list')
+    form_class = OperationForm
+    success_url = reverse_lazy('finances:operation-list')
     template_name = 'pages/finances/operation_create.html'
 
     def form_valid(self, form):
+        """Auto assign current user to operation"""
+
         operation = form.save(commit=False)
         operation.user = self.request.user
         operation.save()
         return super(OperationCreateView, self).form_valid(form)
 
 
+class OperationUpdateView(UpdateView):
+    """View for updating operation"""
+
+    model = Operation
+    form_class = OperationForm
+    success_url = reverse_lazy('finances:operation-list')
+    template_name = 'pages/finances/operation_update.html'
+
+
+class OperationDeleteView(DeleteView):
+    """View for deleting operations"""
+
+    model = Operation
+    success_url = reverse_lazy('finances:operation-list')
+
+
 class OperationCategoryListView(ListView):
+    """View for getting operation categories list"""
+
     model = OperationCategory
     queryset = OperationCategory.objects.all()
     template_name = 'pages/finances/operation_category_list.html'
 
 
 class OperationCategoryCreateView(CreateView):
+    """View for creating operation category"""
+
     model = OperationCategory
-    form_class = OperationCategoryCreationForm
-    success_url = reverse_lazy('operation-category-list')
+    form_class = OperationCategoryForm
+    success_url = reverse_lazy('finances:operation-category-list')
     template_name = 'pages/finances/operation_category_create.html'
 
 
+class OperationCategoryUpdateView(UpdateView):
+    """View for updating operation category"""
+
+    model = OperationCategory
+    form_class = OperationCategoryForm
+    success_url = reverse_lazy('finances:operation-category-list')
+    template_name = 'pages/finances/operation_category_update.html'
+
+
+class OperationCategoryDeleteView(DeleteView):
+    """View for deletion operation category"""
+
+    model = OperationCategory
+    success_url = reverse_lazy('finances:operation-category-list')
+
+
 class AccountListView(ListView):
+    """View for getting accounts list"""
+
     model = Account
     queryset = Account.objects.all()
     template_name = 'pages/finances/account_list.html'
 
 
 class AccountCreateView(CreateView):
+    """View for creating account"""
+
     model = Account
-    form_class = AccountCreationForm
-    success_url = reverse_lazy('finances:account_list')
+    form_class = AccountForm
+    success_url = reverse_lazy('finances:account-list')
     template_name = 'pages/finances/account_create.html'
 
     def form_valid(self, form):
+        """Auto assign current user to account"""
+
         operation = form.save(commit=False)
         operation.user = self.request.user
         operation.save()
         return super(AccountCreateView, self).form_valid(form)
 
 
+class AccountUpdateView(UpdateView):
+    """View for updating account"""
+
+    model = Account
+    form_class = AccountForm
+    success_url = reverse_lazy('finances:account-list')
+    template_name = 'pages/finances/account_update.html'
+
+
+class AccountDeleteView(DeleteView):
+    """View for deleting account"""
+
+    model = Account
+    success_url = reverse_lazy('finances:account-list')
+
+
 class AccountCategoryListView(ListView):
+    """View for getting account categories list"""
     model = AccountCategory
     queryset = AccountCategory.objects.all()
     template_name = 'pages/finances/account_category_list.html'
 
 
 class AccountCategoryCreateView(CreateView):
+    """View for creating account category"""
+
     model = AccountCategory
-    form_class = AccountCategoryCreationForm
-    success_url = reverse_lazy('finances:account_list')
+    form_class = AccountCategoryForm
+    success_url = reverse_lazy('finances:account-category-list')
     template_name = 'pages/finances/account_category_create.html'
+
+
+class AccountCategoryUpdateView(UpdateView):
+    """View for updating Account category"""
+
+    model = AccountCategory
+    form_class = AccountCategoryForm
+    success_url = reverse_lazy('finances:account-category-list')
+    template_name = 'pages/finances/account_category_update.html'
+
+
+class AccountCategoryDeleteView(DeleteView):
+    """View for deletion Account category"""
+
+    model = AccountCategory
+    success_url = reverse_lazy('finances:account-category-list')

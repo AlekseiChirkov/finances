@@ -7,8 +7,8 @@ from apps.finances.models import (
     Operation, OperationCategory, Account, AccountCategory
 )
 from apps.finances.forms import (
-    OperationCreationForm, OperationCategoryCreationForm,
-    AccountCreationForm, AccountCategoryCreationForm
+    OperationForm, OperationCategoryForm,
+    AccountForm, AccountCategoryForm
 )
 
 
@@ -27,9 +27,8 @@ class OperationCreationFormTests(TestCase):
         :return: None
         """
 
-        form = OperationCreationForm()
+        form = OperationForm()
 
-        self.assertIn('user', form.fields)
         self.assertIn('title', form.fields)
         self.assertIn('description', form.fields)
         self.assertIn('category', form.fields)
@@ -41,7 +40,7 @@ class OperationCreationFormTests(TestCase):
         :return: None
         """
 
-        form = OperationCreationForm({
+        form = OperationForm({
             'title': 123
         })
 
@@ -54,13 +53,13 @@ class OperationCreationFormTests(TestCase):
         """
 
         category = OperationCategory.objects.create(title='Title')
-        form = OperationCreationForm(
+        form = OperationForm(
             {
                 'title': 'Title', 'description': 'description',
                 'category': category, 'amount': Decimal("100.12")
             }
         )
-        form.instance.user = self.user,
+        form.instance.user = self.user
         form.save()
 
         operation = Operation.objects.get(user=self.user, title='Title')
@@ -85,7 +84,7 @@ class OperationCategoryCreationFormTests(TestCase):
         :return: None
         """
 
-        form = OperationCategoryCreationForm()
+        form = OperationCategoryForm()
 
         self.assertIn('title', form.fields)
         self.assertIn('parent', form.fields)
@@ -96,7 +95,7 @@ class OperationCategoryCreationFormTests(TestCase):
         :return: None
         """
 
-        form = OperationCategoryCreationForm()
+        form = OperationCategoryForm()
 
         self.assertFalse(form.is_valid())
 
@@ -107,7 +106,7 @@ class OperationCategoryCreationFormTests(TestCase):
         """
 
         category = OperationCategory.objects.create(title='Title')
-        form = OperationCategoryCreationForm(
+        form = OperationCategoryForm(
             {
                 'title': 'Title2', 'parent': category
             }
@@ -135,7 +134,7 @@ class AccountCreationFormTests(TestCase):
         :return: None
         """
 
-        form = AccountCreationForm()
+        form = AccountForm()
 
         self.assertIn('user', form.fields)
         self.assertIn('title', form.fields)
@@ -149,7 +148,7 @@ class AccountCreationFormTests(TestCase):
         :return: None
         """
 
-        form = AccountCreationForm({
+        form = AccountForm({
             'title': 123
         })
 
@@ -162,7 +161,7 @@ class AccountCreationFormTests(TestCase):
         """
 
         category = AccountCategory.objects.create(title='Title')
-        form = AccountCreationForm(
+        form = AccountForm(
             {
                 'title': 'Title', 'description': 'description',
                 'category': category, 'amount': Decimal("100.12")
@@ -193,7 +192,7 @@ class AccountCategoryCreationFormTests(TestCase):
         :return: None
         """
 
-        form = AccountCategoryCreationForm()
+        form = AccountCategoryForm()
 
         self.assertIn('title', form.fields)
         self.assertIn('parent', form.fields)
@@ -204,7 +203,7 @@ class AccountCategoryCreationFormTests(TestCase):
         :return: None
         """
 
-        form = AccountCategoryCreationForm()
+        form = AccountCategoryForm()
 
         self.assertFalse(form.is_valid())
 
@@ -215,7 +214,7 @@ class AccountCategoryCreationFormTests(TestCase):
         """
 
         category = AccountCategory.objects.create(title='Title')
-        form = AccountCategoryCreationForm(
+        form = AccountCategoryForm(
             {
                 'title': 'Title2', 'parent': category
             }

@@ -57,7 +57,7 @@ class Account(models.Model):
         blank=True
     )
     category = models.OneToOneField(
-        'AccountCategory', on_delete=models.SET_NULL, null=True,
+        'AccountCategory', on_delete=models.SET_NULL, null=True, blank=True,
         related_name='account'
     )
     amount = models.DecimalField(
