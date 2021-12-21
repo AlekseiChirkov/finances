@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Operation detail
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/finances/operation_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="operation">
+            <div class="operation-header">
+                <h2>Title: {{ operation.title }}</h2>
+                <span>
+                    <i class="fas fa-edit">
+                        <a href="{% url 'finances:operation-update' operation.pk %}"
+                           class="edit-operation"></a>
+                    </i>
+                    <form action="{% url 'finances:operation-delete' operation.pk %}"
+                          method="post"> {% csrf_token %}
+                        <button type="submit" class="fas fa-trash"></button>
+                    </form>
+                </span>
+            </div>
+            <h3>Categories: {{ operation.category }}</h3>
+            <p>Description: {{ operation.description }}</p>
+            <h5>Amount: {{ operation.amount }}</h5>
+            <h5>Created at: {{ operation.created_at }}</h5>
+        </div>
+    </div>
+{% endblock %}

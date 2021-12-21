@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-    Sign Up
+    Operation category create
 {% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/finances/operation_create.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="form">
-        <form action="{% url 'users:signup' %}" method="post">
+        <form action="{% url 'finances:account-category-update' accountcategory.pk %}"
+              method="post">
             {% csrf_token %}
             {% for field in form.visible_fields %}
                 {{ field.label_tag }} {{ field }}
             {% endfor %}
-            <input type="submit" value="Signup" id="signup">
+            <input type="submit" value="Update category"
+                   id="operation-create">
         </form>
     </div>
 {% endblock %}

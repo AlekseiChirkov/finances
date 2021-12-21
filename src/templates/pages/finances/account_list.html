@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Accounts list
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/finances/operation_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'finances:account-create' %}" class="create-operation">
+        Create new account
+    </a>
+    <div class="content">
+        {% for account in account_list %}
+            <div class="operation">
+                <div class="operation-header">
+                    <h2>{{ account.title }}</h2>
+                    <span>
+                        <a href="{% url 'finances:account-update' account.pk %}"
+                           class="fas fa-edit edit-operation"></a>
+                        <form action="{% url 'finances:account-delete' account.pk %}"
+                              method="post"> {% csrf_token %}
+                            <button type="submit" class="fas fa-trash"></button>
+                        </form>
+                    </span>
+                </div>
+                <h3>{{ account.category }}</h3>
+                <p>{{ account.description }}</p>
+                <h5>{{ account.amount }}</h5>
+                <h5>{{ account.created_at }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

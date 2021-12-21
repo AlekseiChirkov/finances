@@ -20,7 +20,7 @@ class Operation(models.Model):
     amount = models.DecimalField(
         max_digits=10, decimal_places=2
     )
-    created_at = models.DateField(
+    created_at = models.DateTimeField(
         auto_now_add=True
     )
 
@@ -57,7 +57,7 @@ class Account(models.Model):
         blank=True
     )
     category = models.OneToOneField(
-        'AccountCategory', on_delete=models.SET_NULL, null=True,
+        'AccountCategory', on_delete=models.SET_NULL, null=True, blank=True,
         related_name='account'
     )
     amount = models.DecimalField(

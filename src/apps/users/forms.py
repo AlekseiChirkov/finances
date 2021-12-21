@@ -2,10 +2,12 @@ from django import forms
 from django.contrib.auth import (
     get_user_model, password_validation
 )
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class UserCreationForm(forms.ModelForm):
+    """Form to create user and validate passwords"""
+
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
@@ -43,6 +45,8 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.Form):
+    """Form for users login"""
+
     email = forms.EmailField(
         label=_("Email"),
         help_text=_("Enter email to login"),

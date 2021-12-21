@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Account categories list
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/finances/operation_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'finances:account-category-create' %}" class="create-operation">
+        Create new account category
+    </a>
+    <div class="content">
+        {% for category in accountcategory_list %}
+            <div class="operation">
+                <div class="operation-header">
+                    <h2>{{ category.title }}</h2>
+                    <span>
+                        <a href="{% url 'finances:account-category-update' category.pk %}"
+                           class="fas fa-edit edit-operation"></a>
+                        <form action="{% url 'finances:account-category-delete' category.pk %}"
+                              method="post">{% csrf_token %}
+                            <button class="fas fa-trash edit-operation" type="submit"></button>
+                        </form>
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

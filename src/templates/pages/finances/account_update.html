@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Create account
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/finances/operation_create.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <form action="{% url 'finances:account-create' %}" method="post">
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+            <input type="submit" value="Create account"
+                   id="operation-create">
+        </form>
+    </div>
+{% endblock %}

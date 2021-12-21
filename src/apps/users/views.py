@@ -1,32 +1,40 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
-from django.shortcuts import reverse, redirect
 from django.views.generic import FormView
 
 from apps.users.forms import UserCreationForm, UserLoginForm
 
 
 class UserSignUpFormView(FormView):
+    """View for users sign up"""
+
     form_class = UserCreationForm
-    template_name = 'pages/signup.html'
+    template_name = 'pages/users/signup.html'
     success_url = '/'
 
     def form_valid(self, form):
+        """Activate user if signup form valid"""
+
         user = form.save(commit=False)
         user.is_active = True
         user.save()
         return super(UserSignUpFormView, self).form_valid(form)
     
     def form_invalid(self, form):
+        """Process invalid signup form"""
+
         return super(UserSignUpFormView, self).form_invalid(form)
 
 
 class UserLoginFormView(FormView):
+    """View for users login"""
+
     form_class = UserLoginForm
-    template_name = 'pages/login.html'
+    template_name = 'pages/users/login.html'
     success_url = '/'
 
     def form_valid(self, form):
+        """Login user if form is valid"""
+
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(username=email, password=password)
@@ -37,4 +45,6 @@ class UserLoginFormView(FormView):
         return super(UserLoginFormView, self).form_valid(form)
 
     def form_invalid(self, form):
+        """Process invalid form"""
+
         return super(UserLoginFormView, self).form_invalid(form)
