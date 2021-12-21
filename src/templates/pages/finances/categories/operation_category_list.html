@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'finances:operation-category-create' %}" class="create-operation">
-        Create new operation category
-    </a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'finances:operation-category-create' %}" class="create-operation">
+            Create new operation category
+        </a>
+    {% endif %}
     <div class="content">
         {% for category in operationcategory_list %}
             <div class="operation">

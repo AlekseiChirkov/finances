@@ -25,6 +25,7 @@ button{
 
 li {
     list-style: none;
+    text-align: center;
 }
 
 a {
@@ -83,6 +84,7 @@ ul > li {
 }
 
 .footer {
+    margin: 50px 0 0 0;
     padding: 20px;
     width: 100%;
     background: #3c3c3c;

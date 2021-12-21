@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'finances:account-create' %}" class="create-operation">
-        Create new account
-    </a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'finances:account-create' %}" class="create-operation">
+            Create new account
+        </a>
+    {% endif %}
     <div class="content">
         {% for account in account_list %}
             <div class="operation">
