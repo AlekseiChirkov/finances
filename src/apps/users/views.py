@@ -1,6 +1,6 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 
 from apps.users.forms import UserCreationForm, UserLoginForm
 
@@ -49,3 +49,11 @@ class UserLoginFormView(FormView):
         """Process invalid form"""
 
         return super(UserLoginFormView, self).form_invalid(form)
+
+
+class UserProfileView(DetailView):
+    """User profile view"""
+
+    model = get_user_model()
+    template_name = 'pages/users/profile.html'
+
