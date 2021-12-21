@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="profile">
+            <h2>{{ user.username }}</h2>
+            <h2>{{ user.email }}</h2>
+            <h2 class="profile-link"><a href="">Change password</a></h2>
+            <h2 class="profile-link"><a href="">Update profile</a></h2>
+        </div>
+        <div class="dashboard">
+            <div class="stats">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

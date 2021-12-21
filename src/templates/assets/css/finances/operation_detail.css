@@ -14,11 +14,17 @@
     box-shadow: 0 0 50px 50px #5b80b2;
     padding: 15px;
 }
+
 .operation > * {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.operation-header > span {
+    margin: 0 0 0 15px;
+}
+
 .fas:hover {
     cursor: pointer;
     color: #4ac1f7;
