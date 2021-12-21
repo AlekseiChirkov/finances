@@ -12,7 +12,8 @@ class OperationForm(forms.ModelForm):
     class Meta:
         model = Operation
         fields = (
-            'title', 'description', 'category', 'amount'
+            'title', 'description', 'type', 'categories',
+            'account_from', 'account_to', 'amount'
         )
 
 

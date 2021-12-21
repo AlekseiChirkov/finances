@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from apps.users.forms import UserCreationForm, UserLoginForm
@@ -9,7 +10,7 @@ class UserSignUpFormView(FormView):
 
     form_class = UserCreationForm
     template_name = 'pages/users/signup.html'
-    success_url = '/'
+    success_url = reverse_lazy('finances:account-list')
 
     def form_valid(self, form):
         """Activate user if signup form valid"""
@@ -30,7 +31,7 @@ class UserLoginFormView(FormView):
 
     form_class = UserLoginForm
     template_name = 'pages/users/login.html'
-    success_url = '/'
+    success_url = reverse_lazy('finances:account-list')
 
     def form_valid(self, form):
         """Login user if form is valid"""

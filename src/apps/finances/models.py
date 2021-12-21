@@ -5,6 +5,12 @@ from django.conf import settings
 class Operation(models.Model):
     """Model for operation table"""
 
+    TYPES = (
+        ('Income', 'Income'),
+        ('Outcome', 'Outcome'),
+        ('Transfer', 'Transfer'),
+    )
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
         related_name='operation'
@@ -13,9 +19,20 @@ class Operation(models.Model):
         max_length=128, blank=True
     )
     description = models.TextField()
-    category = models.ForeignKey(
-        'OperationCategory', on_delete=models.SET_NULL, blank=True, null=True,
+    type = models.CharField(
+        max_length=64, blank=True, choices=TYPES, default='Outcome'
+    )
+    categories = models.ManyToManyField(
+        'OperationCategory', blank=True,
+        related_name='operations'
+    )
+    account_from = models.ForeignKey(
+        'Account', on_delete=models.SET_NULL, null=True,
         related_name='operation'
+    )
+    account_to = models.ForeignKey(
+        'Account', on_delete=models.SET_NULL, blank=True, null=True,
+        related_name='receive_operation'
     )
     amount = models.DecimalField(
         max_digits=10, decimal_places=2

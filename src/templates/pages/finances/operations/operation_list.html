@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'finances:operation-create' %}" class="create-operation">
-        Create new operation
-    </a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'finances:operation-create' %}" class="create-operation">
+            Create new operation
+        </a>
+    {% endif %}
     <div class="content">
         {% for operation in operation_list %}
             <div class="operation">
@@ -30,7 +32,14 @@
                         </form>
                     </span>
                 </div>
-                <h3>{{ operation.category }}</h3>
+                <h3>{{ operation.type }}</h3>
+                {% if operation.categories is not None %}
+                    <h3>
+                        {% for category in operation.categories.all %}
+                            {{ category.title }}{% if operation.categories.all|length > 1 %},{% endif %}
+                        {% endfor %}
+                    </h3>
+                {% endif %}
                 <p>{{ operation.description }}</p>
                 <h5>{{ operation.amount }}</h5>
                 <h5>{{ operation.created_at }}</h5>
