@@ -12,6 +12,8 @@ services:
              python src/manage.py migrate &&
              python src/manage.py test &&
              python src/manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
     environment:
       - DB_HOST=db
       - DB_NAME=finances_db
