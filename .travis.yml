@@ -6,4 +6,4 @@ before_install:
   - docker build -t scareface/finances -f Dockerfile .
 
 script:
-  - docker run scareface/finances sh -c "python manage.py test"
+  - docker run scareface/finances sh -c "python src/manage.py test"
