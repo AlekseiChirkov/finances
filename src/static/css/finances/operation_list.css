@@ -1,0 +1,42 @@
+.content {
+    margin: 25px auto;
+    width: 60%;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.create-operation {
+    display: block;
+    width: 60%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0;
+    background: #3c3c3c;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.create-operation:hover{
+    background: #4ac1f7;
+    color: #3c3c3c;
+}
+
+.operation {
+    padding: 10px;
+    background: #3c3c3c;
+    border-radius: 8px;
+    box-shadow: 0 0 25px 5px #5b80b2;
+    display: flex;
+    flex-direction: column;
+}
+
+.operation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fas:hover{
+    cursor: pointer;
+    color: #4ac1f7;
+}

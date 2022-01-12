@@ -1,0 +1,47 @@
+.form {
+    height: 100vh;
+}
+
+form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #ffefef;
+    height: 50%;
+    width: 50%;
+    padding: 0 50px;
+    background: #3c3c3c;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 0 50px 50px #5b80b2;
+}
+
+form > * {
+    margin: 0 auto;
+    width: 100%;
+}
+
+input {
+    background: #5b80b2;
+    border: none;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+#signup {
+    margin: 25px auto 0 auto;
+    background: #5b80b2;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+#signup:hover {
+    color: #5b80b2;
+    background: #ffffff;
+}

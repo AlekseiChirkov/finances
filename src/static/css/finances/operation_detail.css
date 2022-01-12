@@ -1,0 +1,31 @@
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #ffefef;
+    height: auto;
+    width: auto;
+    background: #3c3c3c;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 0 50px 50px #5b80b2;
+    padding: 15px;
+}
+
+.operation > * {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.operation-header > span {
+    margin: 0 0 0 15px;
+}
+
+.fas:hover {
+    cursor: pointer;
+    color: #4ac1f7;
+}
