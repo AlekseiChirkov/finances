@@ -24,8 +24,9 @@ class OperationAdminTests(TestCase):
         self.category = OperationCategory.objects.create(title='Category')
         self.operation = Operation.objects.create(
             user=self.user, title='Operation', description='Description',
-            category=self.category, amount=Decimal(100.00)
+            amount=Decimal(100.00)
         )
+        self.operation.categories.add(self.category)
 
     def test_operations_list(self) -> None:
         """
@@ -79,8 +80,9 @@ class OperationCategoryAdminTests(TestCase):
         self.category = OperationCategory.objects.create(title='Category')
         self.operation = Operation.objects.create(
             user=self.user, title='Operation', description='Description',
-            category=self.category, amount=Decimal(100.00)
+            amount=Decimal(100.00)
         )
+        self.operation.categories.add(self.category)
 
     def test_operation_categories_list(self) -> None:
         """

@@ -8,6 +8,9 @@ from apps.finances.models import (
 
 class OperationForm(forms.ModelForm):
     """Form class for operation creation"""
+    categories = forms.ModelMultipleChoiceField(
+        queryset=OperationCategory.objects.all()
+    )
 
     class Meta:
         model = Operation

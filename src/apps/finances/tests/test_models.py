@@ -25,8 +25,9 @@ class ModelTests(TestCase):
         category = OperationCategory.objects.create(title='Category')
         operation = Operation.objects.create(
             user=self.user, title='Operation', description='Description',
-            category=category, amount=Decimal(100.00)
+            amount=Decimal(100.00)
         )
+        operation.categories.add(category)
 
         self.assertEqual(str(operation), operation.title)
 
