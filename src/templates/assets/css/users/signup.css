@@ -34,7 +34,8 @@ input {
 
 #signup {
     margin: 25px auto 0 auto;
-    background: #5b80b2;
+    background: #ffffff;
+    color: #0f3a42;
     border: none;
     border-radius: 8px;
     cursor: pointer;

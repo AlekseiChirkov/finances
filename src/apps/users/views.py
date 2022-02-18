@@ -1,6 +1,10 @@
-from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth.views import LogoutView
 from django.views.generic import FormView, DetailView
+from django.views.decorators.cache import never_cache
+from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
 
 from apps.users.forms import UserCreationForm, UserLoginForm
 
@@ -56,4 +60,3 @@ class UserProfileView(DetailView):
 
     model = get_user_model()
     template_name = 'pages/users/profile.html'
-

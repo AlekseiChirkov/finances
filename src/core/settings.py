@@ -117,8 +117,9 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Local settings import
+LOGOUT_REDIRECT_URL = '/'
 
+# Local settings import
 try:
     from .settings_local import *
 except ImportError:
