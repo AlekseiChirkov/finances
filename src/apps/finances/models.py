@@ -18,7 +18,9 @@ class Operation(models.Model):
     title = models.CharField(
         max_length=128, blank=True
     )
-    description = models.TextField()
+    description = models.TextField(
+        blank=True
+    )
     type = models.CharField(
         max_length=64, blank=True, choices=TYPES, default='Outcome'
     )
