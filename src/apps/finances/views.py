@@ -148,7 +148,7 @@ class OperationCreateView(CreateView):
             account.save()
 
         if operation_type == 'Transfer':
-            to_receive_account = form.cleaned_data.get('receive_account')
+            to_receive_account = form.cleaned_data.get('account_to')
             receive_account = Account.objects.get(id=to_receive_account.id)
             account.amount -= amount
             receive_account.amount += amount
