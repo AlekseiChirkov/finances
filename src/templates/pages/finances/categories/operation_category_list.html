@@ -13,6 +13,10 @@
         <a href="{% url 'finances:operation-category-create' %}" class="create-operation">
             Create new operation category
         </a>
+    {% else %}
+         <a href="{% url 'users:login' %}" class="create-operation">
+            You must be logged in, if you want to create an account
+        </a>
     {% endif %}
     <div class="content">
         {% for category in operationcategory_list %}

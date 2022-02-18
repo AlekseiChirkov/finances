@@ -13,6 +13,10 @@
         <a href="{% url 'finances:account-create' %}" class="create-operation">
             Create new account
         </a>
+    {% else %}
+         <a href="{% url 'users:login' %}" class="create-operation">
+            You must be logged in, if you want to create an account
+        </a>
     {% endif %}
     <div class="content">
         {% for account in account_list %}
