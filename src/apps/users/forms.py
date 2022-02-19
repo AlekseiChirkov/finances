@@ -4,6 +4,7 @@ from django.contrib.auth import (
 )
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+
 from apps.users.models import User
 
 
@@ -105,6 +106,8 @@ class PasswordChangeForm(forms.Form):
 
 
 class UserUpdateForm(forms.ModelForm):
+    """Form for user's profile change"""
+
     class Meta:
         model = User
         fields = ('username', 'email')

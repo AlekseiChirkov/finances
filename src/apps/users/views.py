@@ -86,6 +86,7 @@ class UserPasswordChangeView(FormView):
 
 
 class UserUpdateView(UpdateView):
+    """User profile change view"""
 
     model = User
     form_class = UserUpdateForm
