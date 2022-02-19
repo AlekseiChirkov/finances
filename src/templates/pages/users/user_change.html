@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Password Change
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/users/password_change.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <form action="{% url 'users:user-change' user.id %}" method="post">
+            <h1 id="password-change-header">User change form</h1>
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+            {% csrf_token %}
+            {% for field in form.visible_fields %}
+                {{ field.label_tag }} {{ field }}
+            {% endfor %}
+            <input type="submit" value="Change profile" id="change-password">
+        </form>
+    </div>
+{% endblock %}
