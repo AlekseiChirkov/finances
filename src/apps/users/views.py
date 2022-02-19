@@ -1,12 +1,8 @@
 from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model, authenticate, login, logout
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth import get_user_model, authenticate, login
 from django.views.generic import FormView, DetailView
-from django.views.decorators.cache import never_cache
-from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
 
-from apps.users.forms import UserCreationForm, UserLoginForm
+from apps.users.forms import UserCreationForm, UserLoginForm, PasswordChangeForm
 
 
 class UserSignUpFormView(FormView):
@@ -60,3 +56,29 @@ class UserProfileView(DetailView):
 
     model = get_user_model()
     template_name = 'pages/users/profile.html'
+
+
+class UserPasswordChangeView(FormView):
+    """User password change view"""
+
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('finances:account-list')
+    template_name = 'pages/users/password_change.html'
+
+    def get_form_kwargs(self):
+        """Override method to pass user in form"""
+
+        kwargs = super(UserPasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        """Valid password change form changes user's password"""
+
+        form.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        """Invalid password inputs"""
+
+        return super(UserPasswordChangeView, self).form_invalid(form)
