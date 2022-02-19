@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model, authenticate, login
-from django.views.generic import FormView, DetailView
+from django.views.generic import FormView, DetailView,UpdateView
 
-from apps.users.forms import UserCreationForm, UserLoginForm, PasswordChangeForm
+from apps.users.forms import UserCreationForm, UserLoginForm, PasswordChangeForm, UserUpdateForm
+from apps.users.models import User
 
 
 class UserSignUpFormView(FormView):
@@ -82,3 +83,12 @@ class UserPasswordChangeView(FormView):
         """Invalid password inputs"""
 
         return super(UserPasswordChangeView, self).form_invalid(form)
+
+
+class UserUpdateView(UpdateView):
+    """User profile change view"""
+
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'pages/users/user_change.html'
+    success_url = reverse_lazy('finances:account-list')

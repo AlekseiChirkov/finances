@@ -5,6 +5,8 @@ from django.contrib.auth import (
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+from apps.users.models import User
+
 
 class UserCreationForm(forms.ModelForm):
     """Form to create user and validate passwords"""
@@ -101,3 +103,11 @@ class PasswordChangeForm(forms.Form):
         if commit:
             self.user.save()
         return self.user
+
+
+class UserUpdateForm(forms.ModelForm):
+    """Form for user's profile change"""
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
