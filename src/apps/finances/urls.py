@@ -17,12 +17,12 @@ urlpatterns = [
         name='account-create'
     ),
     path(
-        'account-update/<int:pk>',
+        'account-update/<int:pk>/',
         views.AccountUpdateView.as_view(),
         name='account-update'
     ),
     path(
-        'account-delete/<int:pk>',
+        'account-delete/<int:pk>/',
         views.AccountDeleteView.as_view(),
         name='account-delete'
     ),
@@ -37,12 +37,12 @@ urlpatterns = [
         name='account-category-create'
     ),
     path(
-        'account-category-update/<int:pk>',
+        'account-category-update/<int:pk>/',
         views.AccountCategoryUpdateView.as_view(),
         name='account-category-update'
     ),
     path(
-        'account-category-delete/<int:pk>',
+        'account-category-delete/<int:pk>/',
         views.AccountCategoryDeleteView.as_view(),
         name='account-category-delete'
     ),
@@ -52,7 +52,7 @@ urlpatterns = [
         name='operation-list'
     ),
     path(
-        'operation-detail/<int:pk>',
+        'operation-detail/<int:pk>/',
         views.OperationDetailView.as_view(),
         name='operation-detail'
     ),
@@ -62,12 +62,12 @@ urlpatterns = [
         name='operation-create'
     ),
     path(
-        'operation-update/<int:pk>',
+        'operation-update/<int:pk>/',
         views.OperationUpdateView.as_view(),
         name='operation-update'
     ),
     path(
-        'operation-delete/<int:pk>',
+        'operation-delete/<int:pk>/',
         views.OperationDeleteView.as_view(),
         name='operation-delete'
     ),
@@ -82,12 +82,12 @@ urlpatterns = [
         name='operation-category-create'
     ),
     path(
-        'operation-category-update/<int:pk>',
+        'operation-category-update/<int:pk>/',
         views.OperationCategoryUpdateView.as_view(),
         name='operation-category-update'
     ),
     path(
-        'operation-category-delete/<int:pk>',
+        'operation-category-delete/<int:pk>/',
         views.OperationCategoryDeleteView.as_view(),
         name='operation-category-delete'
     ),
