@@ -6,6 +6,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /usr/app
 COPY requirements.txt /usr/app/
 
+RUN apt-get update
 RUN python3 -m venv venv
 RUN source venv/bin/activate
 RUN python -m pip install --upgrade pip

@@ -13,6 +13,7 @@ from apps.finances.views import (
     OperationListView, OperationCreateView,
     OperationCategoryListView, OperationCategoryCreateView,
 )
+from apps.users.models import User
 
 
 def sample_account_category():
@@ -34,6 +35,16 @@ def sample_account(user: object, title: str, description: str, amount: Decimal):
         user=user, title=title, description=description, amount=amount,
         category=sample_account_category(),
     )
+
+
+def sample_user(email: str = 'sample@mail.com',
+                username: str = 'SampleUsername') -> User:
+    user = get_user_model().objects.create_user(
+        email=email, username=username, is_active=True
+    )
+    user.set_password('Password1!')
+    user.save()
+    return user
 
 
 class AccountViewTests(TestCase):
@@ -77,6 +88,36 @@ class AccountViewTests(TestCase):
         self.assertEqual(res.status_code, 302)
 
 
+class OperationViewTests(TestCase):
+    """Test that Operation View works correctly."""
 
+    def setUp(self) -> None:
+        self.factory = RequestFactory()
+        self.user = get_user_model()(
+            email='Admin@gmail.com', username='Alex', is_active=True,
+        )
+        self.password = 'Aleksissanchez98'
+        self.user.set_password(self.password)
+        self.user.save()
 
+    def test_display_operation_of_current_user(self) -> None:
+        """
+        Test that operation objects displays only for operation owner user
+        """
 
+        Operation.objects.create(
+            user=self.user, title="Operation 1", amount=10
+        )
+        Operation.objects.create(
+            user=sample_user(), title='Operation 2', amount=100
+        )
+
+        request = self.factory.get(reverse('finances:operation-list'))
+        request.user = self.user
+
+        view = OperationListView()
+        view.request = request
+
+        qs = view.get_queryset()
+
+        self.assertEqual(len(qs), 1)

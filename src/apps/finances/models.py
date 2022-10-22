@@ -58,6 +58,9 @@ class OperationCategory(models.Model):
         related_name='operation_category'
     )
 
+    class Meta:
+        verbose_name_plural = 'Operation Categories'
+
     def __str__(self):
         return self.title
 
@@ -100,6 +103,9 @@ class AccountCategory(models.Model):
         'self', on_delete=models.CASCADE, blank=True, null=True,
         related_name='account_category'
     )
+
+    class Meta:
+        verbose_name_plural = 'Account Categories'
 
     def __str__(self):
         return self.title
